@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+    
+<html>
+    <head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script src="js/grapenote.js"></script>
+      
+        <link rel="stylesheet" href="css/grapenote.css" type="text/css">
+              <link rel="stylesheet" href="/fontawesome/css/font-awesome.css" type="text/css">
+    </head>
+    <body>
+        <h2><i class="icon-circle"><i class="icon-circle" class="innerCir"></i></i>GrapeNote</h2>
+        <h4><i class="icon-quote-left"></i>Deliciously palatable jQuery+PHP Note plugin.. <b>yum</b><i class="icon-quote-right"></i></h4>
+        <div class="test"  grapeID="32434" grapeName="NBlsh" grapeValue="34">
+          <!--<div class="gHolder">
+            <div class="grapeNote">             
+            </div>
+          </div>-->
+          <div class="gHolder">
+            <div  grapeID="23523465" grapeName="Woot" grapeValue="11" class="grapeNote">             
+            </div>
+          </div>
+        <!--  <div  class="gHolder" grapeID="26436" grapeName="Ates" grapeValue="45">
+            <div class="grapeNote">             
+            </div>
+          </div>-->
+        </div>
+        <div class="test noback">
+            <div class="cont">
+                <h3>Fully loaded.. like yo mamma's grapes</h3>
+                Hmm.. yum. Remember how tasty a big bag of red or green grapes taste?
+                Well it doesn't matter 'cause <b>GrapeNote</b> tastes better. Unlock super awesomeness
+                with super-grapealicious abilities such as forcing rows, customizing your notes, and more!
+            </div>
+            <div class="cont">
+                <h3>Its like the juicy part... you know..</h3>
+                Yeah, yep, uhuh. You'll understand how powerful <b>GrapeNote</b> is before you know it.
+                It has nothing to do with the fact that I wrote this copy at 3am, no-siree!
+                Take the <b>GrapeNotes</b> ajax class, your database, and grapenotes for a spin. Yeehaw!
+            </div>
+            <div class="cont">
+                <h3>What does it do? Oh yeah.. sorry</h3>
+                Its <underline>REALLY</underline> sweet. You can like.. add your people's notes to it, POST
+                new notes, retrieve new ones AND its super discreet. Throw notes into every page on your site.
+                <b>GrapeNote</b> can be decked out in customization, or just let it run free in the wild.. like
+                a small injured bird! 
+            </div>
+            <div class="cont">
+                <h3>No seriously.. are you high?</h3>
+                NO NO NO NO.. maybe? No, just t-"higher"-ed.. lololol
+                Ok, but seriously, <b>GrapeNote</b> is awesome.. and I coded it correctly (really)
+                Look, I even remembered to bold <b>GrapeNote</b> every time.. does that add to my credibility?
+            </div>
+        </div>
+    </body>
+    
+</html>
+
+<script>
+    $(document).ready(function(){
+        $.grapeNote({
+            getNotesFrom : "php/grapenote.php",
+            sendNotesTo : "php/grapenote.php",
+            filter : true,
+            size : "medium",
+            bgColor : "white",
+            bubbleColor : "blue",
+            dateStamp : true,
+            noteAdding : true,
+            height : "300px", //if set will scroll when max is reached
+            width : "200px"
+            });
+
+        });
+    
+</script>
