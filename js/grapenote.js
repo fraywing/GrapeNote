@@ -77,14 +77,19 @@
                 $(this).append("<img class='grapeNote-loader' width='"+methods.getSizes(data.opts)+"' src='"+loaders.circle+"'>"); //show a loader
                 var def =  self.getNote(data); //get the note
                 def.success(function(data){ //when its done, do a bunch of crap
+                  
                     $(s).find('.grapeNote-loader').remove();
                     $(s).find('.grapeNote-img').show();
                    var prom = $('.grapeNote').find('.grapeNote-outer').grapeHide();
-                   prom.done(function(mess){
-                    console.log('asd');
-                   
+                   prom.done(function(mess){                   
                      $(s).find('.grapeNote-outer').remove();
+                     if(data.title !== undefined){
+                        var title = data.title;
+                     }
                      $(s).prepend(self.getHtml(data,s));
+                       if(title !== undefined){
+                        $(s).find('.grapeNote-title').html(title);
+                       }
                      var top = $(s).offset().top,
                      outer = $(s).find('.grapeNote-outer'),
                      maxH = $(s).find('.grapeNote-outer').css("height").split('px')[0],
@@ -195,10 +200,11 @@
   
             if(outer[0] !== undefined){
             $('.grapeNote-outer').removeClass('grapeNote-easeOut');
-            $('.grapeNote-outer').slideUp(350, function(){
-                $(this).remove();
+            var timr;
+            timr = setTimeout(function(){
+                 $('.grapeNote-outer').remove();
                 dfd.resolve("done");
-                });
+                }, 300);
             }else{
                  dfd.resolve("done");
                 }
@@ -210,6 +216,10 @@
            var data = $(el).data();
            console.log('asd', data);
            var firstDate = null; //should be the lastest date
+            var title = data.title == true ? "<div class='grapenote-title'></div>" : '';
+            if(o.title !== undefined){
+                delete(o.title);
+            }
            for(var x in o){
             var noteID = x,
             noteBody = escape(o[x].text),
@@ -225,15 +235,18 @@
             if(justrows !== undefined){
                 return html;
             }
+           
             var noteArea = "<div class='grapeNote-outer' value="+firstDate+">\
-                           <div class='grapeNote-inner' style=' width:"+data.opts.width+";'>\
-                           <div class='grapeNote-load'>Load More...</div><div class='grapeNote-body'>"+html+"</div>\
+                           <div class='grapeNote-inner' style=' width:"+data.opts.width+";'>"+title+
+                           "<div class='grapeNote-load'>Load More...</div><div class='grapeNote-body'>"+html+"</div>\
                            <div class='grapeNote-addNote'><textarea class='grapeNote-textarea'></textarea><div class='grapeNote-saveButtons'>\
                            <div class='grapeNote-button grapeNote-save'>Save</div></div></div></div>";
             return noteArea;
         },
         saveNote : function(data,val){
             var d = {};
+            d["id"] = data.id;
+            d["options"] = data.children;
             d["content"] = val;
             var j = JSON.stringify(d);
             var p = $.post(data.opts.url, {"sendGrapeNotes" : j}, function(){
@@ -241,7 +254,7 @@
         return p;
         },
         getNote : function(data,lastRecordID){
-            console.log(data,lastRecordID);
+       //     console.log(data,lastRecordID);
            var id = data.id,
            children = data.children,
            url = data.opts.getNotesFrom,
